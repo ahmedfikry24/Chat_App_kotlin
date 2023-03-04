@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
-    name="ViewModel"
-    type="com.example.chatapp.ui.login.LoginViewModel" />
+
+        <variable
+            name="ViewModel"
+            type="com.example.chatapp.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,5 +15,58 @@
         android:layout_height="match_parent"
         tools:context=".ui.login.LoginActivity">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuildLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/topGuildLine">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/topGuildLine">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress"
+                    android:text="@={ViewModel.email}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                app:layout_constraintTop_toBottomOf="@id/emailTextInput">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="password"
+                    android:hint="Password"
+                    android:inputType="text"
+                    android:text="@={ViewModel.password}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->ViewModel.login()}"
+                android:text="@string/login" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
