@@ -36,7 +36,8 @@
                 android:id="@+id/firstNameTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/emailTextInput">
+                error="@{viewModel.firstNameError}"
+                >
 
                 <EditText
                     android:layout_width="match_parent"
@@ -52,7 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                app:layout_constraintTop_toBottomOf="@id/emailTextInput">
+                error="@{viewModel.lastNameError}"
+                >
 
                 <EditText
                     android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                 android:id="@+id/emailTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/topGuildLine">
+                error="@{viewModel.emailError}"
+                >
 
                 <EditText
                     android:layout_width="match_parent"
@@ -83,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                app:layout_constraintTop_toBottomOf="@id/emailTextInput">
+                error="@{viewModel.passwordError}"
+                >
 
                 <EditText
                     android:layout_width="match_parent"

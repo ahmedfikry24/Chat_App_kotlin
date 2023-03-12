@@ -1,8 +1,12 @@
 package com.example.chatapp.ui.register
 
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import com.example.chatapp.utils.BaseViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel : BaseViewModel() {
     var firstName = ""
     var lastName = ""
     var email = ""
@@ -13,15 +17,29 @@ class RegisterViewModel : ViewModel() {
     var emailError: String? = ""
     var passwordError: String? = ""
 
+    val auth: FirebaseAuth = Firebase.auth
+
     fun register() {
-        if (!validate()) return
+        if (validate()) return
+        isLoading.value = true
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+            isLoading.value = false
+            if (it.isSuccessful) {
+                dialogMessage.value = "Successfully"
+                Log.e("register", "complete")
+            } else {
+                dialogMessage.value = it.exception?.message
+                Log.e("register", it.exception?.message.toString())
+
+            }
+        }
 
     }
 
     fun validate(): Boolean {
-        var valid = true
+        var valid = false
         if (firstName.isBlank()) {
-            valid = false
+            valid = true
             firstNameError = "this field required"
             return valid
         } else {
@@ -29,7 +47,7 @@ class RegisterViewModel : ViewModel() {
         }
 
         if (lastName.isBlank()) {
-            valid = false
+            valid = true
             lastNameError = "this field required"
             return valid
         } else {
@@ -37,7 +55,7 @@ class RegisterViewModel : ViewModel() {
         }
 
         if (email.isBlank()) {
-            valid = false
+            valid = true
             emailError = "this field required"
             return valid
         } else {
@@ -45,7 +63,7 @@ class RegisterViewModel : ViewModel() {
         }
 
         if (password.isBlank()) {
-            valid = false
+            valid = true
             passwordError = "this field required"
             return valid
         } else {
@@ -54,4 +72,5 @@ class RegisterViewModel : ViewModel() {
 
         return valid
     }
+
 }

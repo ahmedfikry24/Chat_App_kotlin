@@ -1,5 +1,6 @@
 package com.example.chatapp.utils
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModel
 abstract class BaseActivity<VM : ViewModel, B : ViewDataBinding> : AppCompatActivity() {
     lateinit var viewModel: VM
     lateinit var binding: B
+    var progressDialog = ProgressDialog(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = viewModel()
@@ -17,4 +19,13 @@ abstract class BaseActivity<VM : ViewModel, B : ViewDataBinding> : AppCompatActi
 
     abstract fun getLayoutId(): Int
     abstract fun viewModel(): VM
+
+    fun showLoading(){
+       progressDialog.setTitle("Loading")
+        progressDialog.show()
+    }
+
+    fun hideLoading(){
+        progressDialog.hide()
+    }
 }
