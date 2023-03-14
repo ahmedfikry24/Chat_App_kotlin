@@ -10,10 +10,12 @@ class LoginViewModel : BaseViewModel() {
     var email = ""
     var password = ""
 
-    var emailError: String? = ""
-    var passwordError: String? = ""
+    var emailError: String? = null
+    var passwordError: String? = null
 
     val auth : FirebaseAuth= Firebase.auth
+
+    var navigator : NavigatorLogin? = null
 
     fun login(){
         if (validate()) return
@@ -22,9 +24,10 @@ class LoginViewModel : BaseViewModel() {
             isLoading.value = false
             if (it.isSuccessful){
                 dialogMessage.value = "Successfully"
-                Log.e("login" , "successfully")
+                navigator?.navigateToHome()
+
             }else{
-                Log.e("login" , it.exception?.message.toString())
+
                 dialogMessage.value = it.exception?.message
             }
         }

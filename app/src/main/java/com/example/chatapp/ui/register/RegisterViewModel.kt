@@ -19,6 +19,8 @@ class RegisterViewModel : BaseViewModel() {
 
     val auth: FirebaseAuth = Firebase.auth
 
+    var navigator : NavigatorRegister? = null
+
     fun register() {
         if (validate()) return
         isLoading.value = true
@@ -26,10 +28,10 @@ class RegisterViewModel : BaseViewModel() {
             isLoading.value = false
             if (it.isSuccessful) {
                 dialogMessage.value = "Successfully"
-                Log.e("register", "complete")
+                navigator?.navigateToLogin()
+
             } else {
                 dialogMessage.value = it.exception?.message
-                Log.e("register", it.exception?.message.toString())
 
             }
         }
