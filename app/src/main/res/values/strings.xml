@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Chat App</string>
     <string name="login">Login</string>
+    <string name="add_room">Add Room</string>
+    <string name="home">Home</string>
+    <string name="create_new_room">Create New Room</string>
+    <string name="enter_group_name">enter group name</string>
+    <string name="enter_description">enter description</string>
 </resources>
